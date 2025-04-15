@@ -1,0 +1,184 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>IP Address Visualization on Globe</title>
+    <style>
+        /* Main body styles */
+        body {
+            margin: 0;
+            padding: 0;
+            overflow: hidden;
+            font-family: 'Arial', sans-serif;
+            background-color: #000;
+            color: #fff;
+        }
+
+        /* Canvas container */
+        #canvas-container {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+        }
+
+        /* Info box styling */
+        #info {
+            position: absolute;
+            top: 20px;
+            left: 20px;
+            background: rgba(0, 0, 0, 0.7);
+            color: white;
+            padding: 10px 15px;
+            border-radius: 5px;
+            font-size: 14px;
+            pointer-events: none;
+            z-index: 100;
+            max-width: 300px;
+            display: none;
+            border: 1px solid #444;
+        }
+
+        /* Status display */
+        #status {
+            position: absolute;
+            top: 20px;
+            right: 20px;
+            background: rgba(0, 0, 0, 0.7);
+            color: white;
+            padding: 10px 15px;
+            border-radius: 5px;
+            font-size: 14px;
+            z-index: 100;
+            border: 1px solid #444;
+        }
+
+        /* Control panel */
+        #controls {
+            position: absolute;
+            bottom: 30px;
+            left: 50%;
+            transform: translateX(-50%);
+            background: rgba(0, 0, 0, 0.7);
+            color: white;
+            padding: 15px;
+            border-radius: 8px;
+            display: flex;
+            gap: 12px;
+            z-index: 100;
+            border: 1px solid #444;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+        }
+
+        /* Button styles */
+        button {
+            padding: 10px 18px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-weight: bold;
+            font-size: 14px;
+            transition: all 0.2s ease;
+            min-width: 120px;
+        }
+
+        button:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+        }
+
+        button:active {
+            transform: translateY(0);
+        }
+
+        button:disabled {
+            opacity: 0.6;
+            cursor: not-allowed;
+            transform: none !important;
+            box-shadow: none !important;
+        }
+
+        /* Button colors */
+        #resetView {
+            background-color: #f44336;
+            color: white;
+        }
+
+        #toggleRotation {
+            background-color: #2196F3;
+            color: white;
+        }
+
+        #toggleGreen {
+            background-color: #4CAF50;
+            color: white;
+        }
+
+        #toggleRed {
+            background-color: #FF5722;
+            color: white;
+        }
+
+        /* Loading indicator */
+        .loader {
+            display: none;
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            border: 5px solid #f3f3f3;
+            border-top: 5px solid #3498db;
+            border-radius: 50%;
+            width: 50px;
+            height: 50px;
+            animation: spin 1s linear infinite;
+            z-index: 101;
+        }
+
+        @keyframes spin {
+            0% { transform: translate(-50%, -50%) rotate(0deg); }
+            100% { transform: translate(-50%, -50%) rotate(360deg); }
+        }
+
+        /* Responsive adjustments */
+        @media (max-width: 768px) {
+            #controls {
+                bottom: 10px;
+                padding: 10px;
+                flex-wrap: wrap;
+                justify-content: center;
+            }
+            
+            button {
+                min-width: 100px;
+                padding: 8px 12px;
+            }
+            
+            #info, #status {
+                font-size: 12px;
+                padding: 8px 12px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div id="canvas-container"></div>
+    <div id="info">Hover over a point for details</div>
+    <div id="status">Status: Ready</div>
+    <div id="controls">
+        <button id="resetView">Reset View</button>
+        <button id="toggleRotation">Stop Rotation</button>
+        <button id="toggleGreen">Hide Green</button>
+        <button id="toggleRed">Hide Red</button>
+        <button id="fetchData">Fetch Data</button>
+    </div>
+    <div class="loader"></div>
+
+    <!-- Three.js libraries -->
+    <script src="https://cdn.jsdelivr.net/npm/three@0.132.2/build/three.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/three@0.132.2/examples/js/controls/OrbitControls.js"></script>
+    
+    <!-- Main application script -->
+    <script src="../static/js/app.js"></script>
+</body>
+</html>
