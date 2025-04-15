@@ -15,7 +15,7 @@ def send_data():
             # Send the accumulated package
             try:
                 response = requests.post(
-                    'http://127.0.0.1:5000/',
+                    'http://webapp:5000/',
                     json=package,
                     headers={'Content-Type': 'application/json'}
                 )

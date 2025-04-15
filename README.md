@@ -1,17 +1,10 @@
 # This is the 2nd assignment for DWV course.
 
 ## How to run
-Install libraries
+Run docker-compose
 ```bash
-pip install -r requirements.txt
-```
-Fist run server.py
-```bash
-python server.py
-```
-Next run sender.py
-```bash
-python sender.py
+docker-compose build
+docker-compose up
 ```
 
 The dashboard is accessible by link: http://localhost:5000/dashboard

@@ -1,0 +1,38 @@
+version: '3.8'
+
+services:
+  webapp:
+    build:
+      context: .
+      dockerfile: Dockerfile.webapp
+    ports:
+      - "5000:5000"
+    volumes:
+      - ./static:/app/static
+      - ./templates:/app/templates
+    environment:
+      - FLASK_ENV=development
+    # Print dashboard URL when container starts
+    command: >
+      sh -c "echo '
+      ====================================================
+      Dashboard available at: http://localhost:5000/dashboard
+      ====================================================
+      ' && python server.py"
+
+  sender:
+    build:
+      context: .
+      dockerfile: Dockerfile.sender
+    volumes:
+      - ./ip_addresses.csv:/app/ip_addresses.csv
+      - csv-data:/app/output
+    depends_on:
+      - webapp
+
+volumes:
+  csv-data:
+
+networks:
+  default:
+    driver: bridge
