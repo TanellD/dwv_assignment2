@@ -128,17 +128,14 @@ function createGlobe() {
 // Fetch data from the API
 async function fetchIPData(endpoint = API_RECENT_DATA) {
     try {
-        document.getElementById('status').textContent = "Status: Fetching data...";
         const response = await fetch(endpoint);
         if (!response.ok) {
             throw new Error(`HTTP error! Status: ${response.status}`);
         }
         const data = await response.json();
-        document.getElementById('status').textContent = `Status: Map has ${data.length} data points`;
         return data;
     } catch (error) {
         console.error("Error fetching data:", error);
-        document.getElementById('status').textContent = `Status: Error fetching data - ${error.message}`;
         return [];
     }
 }
@@ -320,8 +317,6 @@ function createStatsDisplay() {
 // Load initial data from API
 async function loadInitialData() {
     document.querySelector('.loader').style.display = 'block';
-    document.getElementById('status').textContent = "Status: Loading initial data...";
-    
     const data = []
     
     if (data.length > 0) {
@@ -331,9 +326,7 @@ async function loadInitialData() {
         // Setup raycaster for hover info
         setupRaycaster(currentPoints);
         
-        document.getElementById('status').textContent = `Status: Loaded ${data.length} initial points`;
-    } else {
-        document.getElementById('status').textContent = "Status: No initial data available";
+        
     }
     
     document.querySelector('.loader').style.display = 'none';
@@ -349,7 +342,6 @@ function setupControls() {
         camera.lookAt(0, 0, 0);
         controls.update();
         
-        document.getElementById('status').textContent = "Status: View reset";
     });
     
     // Toggle rotation button
@@ -402,8 +394,6 @@ function updatePointsVisibility() {
 // Start live visualization with periodic updates
 function startLiveVisualization() {
     visualizationActive = true;
-    document.getElementById('status').textContent = "Status: Live data visualization started";
-    
     // Fetch new data every 5 seconds
     dataFetchInterval = setInterval(async () => {
         const newData = await fetchIPData(API_RECENT_DATA);
@@ -416,7 +406,6 @@ function startLiveVisualization() {
             // Update raycaster for hover info
             setupRaycaster(currentPoints);
             
-            document.getElementById('status').textContent = `Status: Updated to ${newData.length} new points`;
         }
     }, 5000);
 }
@@ -425,7 +414,6 @@ function startLiveVisualization() {
 function stopLiveVisualization() {
     clearInterval(dataFetchInterval);
     visualizationActive = false;
-    document.getElementById('status').textContent = "Status: Live data visualization stopped";
 }
 
 // Setup raycaster for hover information

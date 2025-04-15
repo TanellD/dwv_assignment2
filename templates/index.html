@@ -39,19 +39,6 @@
             border: 1px solid #444;
         }
 
-        /* Status display */
-        #status {
-            position: absolute;
-            top: 20px;
-            right: 20px;
-            background: rgba(0, 0, 0, 0.7);
-            color: white;
-            padding: 10px 15px;
-            border-radius: 5px;
-            font-size: 14px;
-            z-index: 100;
-            border: 1px solid #444;
-        }
 
         /* Control panel */
         #controls {
@@ -154,7 +141,7 @@
                 padding: 8px 12px;
             }
             
-            #info, #status {
+            #info {
                 font-size: 12px;
                 padding: 8px 12px;
             }
@@ -164,7 +151,6 @@
 <body>
     <div id="canvas-container"></div>
     <div id="info">Hover over a point for details</div>
-    <div id="status">Status: Ready</div>
     <div id="controls">
         <button id="resetView">Reset View</button>
         <button id="toggleRotation">Stop Rotation</button>
